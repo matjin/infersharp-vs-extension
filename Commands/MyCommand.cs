@@ -2,6 +2,8 @@
 using Microsoft.Sarif.Viewer.Interop;
 using Microsoft.VisualStudio.Shell.Interop;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace infersharp_vs_ext
@@ -25,20 +27,11 @@ namespace infersharp_vs_ext
             p.StartInfo = info;
             p.Start();
             p.EnableRaisingEvents = true;
-            //p.Exited += new EventHandler(p_ProcessExited);
             p.BeginOutputReadLine();
             p.BeginErrorReadLine();
             void p_OutputDataReceived(object sender, DataReceivedEventArgs e)
             {
                 pane.WriteLine(e.Data);
-            }
-            async void p_ProcessExited(object sender, EventArgs e)
-            {
-                await pane.WriteLineAsync("InferSharp analysis completed.");
-                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-                var vsShell = (IVsShell)ServiceProvider.GlobalProvider.GetService(typeof(IVsShell));
-                var viewer = new SarifViewerInterop(vsShell);
-                await viewer.OpenSarifLogAsync(selectedPath + "\\infer-out\\report.sarif");
             }
         }
         
@@ -52,7 +45,6 @@ namespace infersharp_vs_ext
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
             OutputWindowPane pane = await VS.Windows.CreateOutputWindowPaneAsync("InferSharp");
-            using Process p = new Process();
             using FolderBrowserDialog dialog = new();
             dialog.ShowNewFolderButton = false;
             dialog.Description =
@@ -68,8 +60,21 @@ namespace infersharp_vs_ext
                     Utils.Print("Translation complete. Beginning analysis."),
                     Utils.InferAnalyze(inputPath)
                 };
-                RunCommands(p,analysisCommands, pane, dialog.SelectedPath);
-              //  p.WaitForExit();
+                async void callBack(object state)
+                {
+                    using Process p = new();
+                    RunCommands(p, analysisCommands, pane, dialog.SelectedPath);
+                    p.WaitForExit();
+                    var sarifReportPath = dialog.SelectedPath + "\\infer-out\\report.sarif";
+                    if (File.Exists(sarifReportPath))
+                    {
+                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                        var shell = Microsoft.VisualStudio.Shell.Package.GetGlobalService(typeof(SVsShell)) as IVsShell;
+                        var viewer = new SarifViewerInterop(shell);
+                        await viewer.OpenSarifLogAsync(sarifReportPath);
+                    }
+                }
+                _ = ThreadPool.QueueUserWorkItem(callBack: callBack);
             }
             else
             {
