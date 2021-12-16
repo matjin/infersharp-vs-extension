@@ -7,11 +7,11 @@
                                     + INFERSHARP_VERSION + "/infersharp-linux64-v"
                                     + INFERSHARP_VERSION + ".tar.gz");
         private const string RUN_WSL_UBUNTU = "wsl ~ -d ubuntu -u root";
-        private const string INFERSHARP_FOLDER_NAME = "infersharp" + INFERSHARP_VERSION;
         private const string CORELIB_FILENAME = "/System.Private.CoreLib.dll";
         private const string CORELIB_PATH = INFERSHARP_FOLDER_NAME + "/Cilsil" + CORELIB_FILENAME;
         private const string INFER_BINARIES = INFERSHARP_FOLDER_NAME + "/infer/lib/infer/infer/bin/infer";
 
+        public const string INFERSHARP_FOLDER_NAME = "infersharp" + INFERSHARP_VERSION;
         public const string INFERSHARP_TAR_GZ = "infersharp.tar.gz";
         public const string INFER_OUT = "infer-out/";
         public const string INSTALL_WSL_UBUNTU  = "wsl --install -d ubuntu";
@@ -26,9 +26,6 @@
                                                     "Start-Sleep -s 5;" + 
                                                 "} " +
                                                 "until ($success);");
-        public string UNZIP_BINARIES = RunWslUbuntu("tar -xvzf " + INFERSHARP_TAR_GZ) +  ';' + 
-                                           RunWslUbuntu("mv infersharp " + INFERSHARP_FOLDER_NAME);
-        public string CHECK_SETUP = RunWsl("ls " + INFERSHARP_FOLDER);
         public const string SET_WSL_DEFAULT_UBUNTU = "wsl -s ubuntu";
         public const string MONITOR = ("do { Start-Sleep -s 60; $count = " + RUN_WSL_UBUNTU + 
                                             " grep -wc 'Elapsed analysis time:' " + INFER_OUT + 
