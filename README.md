@@ -2,8 +2,6 @@
 
 This is an extension which integrates [InferSharp](https://github.com/microsoft/infersharp) version 1.2 into Visual Studio. Currently, this extension has only been tested for Windows.
 
-#![Demo](https://github.com/matjin/infersharp-extension/blob/master/images/extension_text.gif?raw=true)
-
 ## Getting Started 
 
 1. Run automatic setup via the *InferSharp Analysis* command added to your Tools menu by the extension. Install progress is reported in the InferSharp channel within the Output tab. See **Known Issues** if you run into any issues. Wait for setup to complete.
