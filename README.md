@@ -1,8 +1,8 @@
 # InferSharp Extension README
 
-This is an extension which integrates [InferSharp](https://github.com/microsoft/infersharp) version 1.2 into VSCode. Currently, this extension has only been tested for Windows.
+This is an extension which integrates [InferSharp](https://github.com/microsoft/infersharp) version 1.2 into Visual Studio. Currently, this extension has only been tested for Windows.
 
-![Demo](https://github.com/matjin/infersharp-extension/blob/master/images/extension_text.gif?raw=true)
+#![Demo](https://github.com/matjin/infersharp-extension/blob/master/images/extension_text.gif?raw=true)
 
 ## Getting Started 
 
