@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="infersharp_vs_ext.c28d99a5-39d6-47e4-8e51-c181f4b02ede" Version="1.0" Language="en-US" Publisher="Matthew Jin" />
-        <DisplayName>infersharp_vs_ext</DisplayName>
-        <Description>Empty VSIX Project.</Description>
+        <Identity Id="infersharp_vs_ext.c28d99a5-39d6-47e4-8e51-c181f4b02ede" Version="1.0" Language="en-US" Publisher="matthew-jin" />
+        <DisplayName>InferSharp</DisplayName>
+        <Description xml:space="preserve">Visual Studio extension experience for InferSharp https://github.com/microsoft/infersharp
+
+</Description>
+        <MoreInfo>https://github.com/microsoft/infersharp</MoreInfo>
+        <License>LICENSE</License>
+        <GettingStartedGuide>README.md</GettingStartedGuide>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Icon.png</PreviewImage>
+        <Preview>true</Preview>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
