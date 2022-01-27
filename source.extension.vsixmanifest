@@ -19,7 +19,7 @@
         </InstallationTarget>
     </Installation>
     <Dependencies>
-        <Dependency d:Source="Installed" Id="Microsoft.Sarif.Viewer.2022.Michael C. Fanning.f17e897a-fd38-4e1f-99db-19fa34a4e184" DisplayName="Microsoft SARIF Viewer 2022" Version="[3.0.42.39775,4.0)" d:InstallSource="Download" Location="https://marketplace.visualstudio.com/_apis/public/gallery/publishers/WDGIS/vsextensions/MicrosoftSarifViewer/3.0.42.39775/vspackage" />
+        <Dependency d:Source="File" DisplayName="Microsoft SARIF Viewer 2022" Id="Microsoft.Sarif.Viewer.2022.Michael C. Fanning.f17e897a-fd38-4e1f-99db-19fa34a4e184" Version="[3.0.55.45839,4.0.0.0)" d:InstallSource="Embed" Location="Microsoft.Sarif.Viewer.vsix" />
     </Dependencies>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,)" DisplayName="Visual Studio core editor" />
